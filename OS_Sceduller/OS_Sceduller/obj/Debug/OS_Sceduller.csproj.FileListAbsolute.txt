@@ -1,0 +1,9 @@
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\bin\Debug\OS_Sceduller.exe.config
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\bin\Debug\OS_Sceduller.exe
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\bin\Debug\OS_Sceduller.pdb
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\obj\Debug\OS_Sceduller.csprojResolveAssemblyReference.cache
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\obj\Debug\OS_Sceduller.Form1.resources
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\obj\Debug\OS_Sceduller.Properties.Resources.resources
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\obj\Debug\OS_Sceduller.csproj.GenerateResource.Cache
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\obj\Debug\OS_Sceduller.exe
+D:\Faculty\WorkSpace\C#\OS_Sceduller\OS_Sceduller\obj\Debug\OS_Sceduller.pdb
