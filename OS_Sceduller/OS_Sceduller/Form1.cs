@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace OS_Sceduller
 {
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -20,6 +21,43 @@ namespace OS_Sceduller
         List<int> input_burst = new List<int>();
         List<int> input_priority = new List<int>();
         List<int> id = new List<int>();
+        void jop_first(List<int> input_process, List<int> input_burst)
+        {
+            int begin = 0, end = 0, cnt;
+            cnt = input_process.Count;
+            List<int> no_process = new List<int>();
+            for (int ii = 0; ii < cnt; ii++)
+            {
+                no_process.Add(ii);
+            }
+            int index = 0, i = 0;
+            while (input_process.Count != 0)
+            {
+
+                int j = 0;
+                index = 0;
+                if (input_process.Count != 1)
+                {
+                    while (input_process[j] <= begin && input_process[j + 1] <= begin)
+                    {
+                        if (input_burst[j + 1] < input_burst[j])
+                        {
+                            index++;
+                        }
+                        j++;
+                        if (j + 1 >= input_process.Count)
+                            break;
+                    }
+                }
+                end += input_burst[index];
+                chart1.Series[0].Points.AddXY(no_process[index], begin, end);
+                begin = end;
+                input_process.RemoveAt(index);
+                input_burst.RemoveAt(index);
+                no_process.RemoveAt(index);
+                i++;
+            }
+        }
         private void progressBar1_Click(object sender, EventArgs e)
         {
 
@@ -50,7 +88,6 @@ namespace OS_Sceduller
             input_process.Add(Convert.ToInt32(arriv.Text));
             input_burst.Add(Convert.ToInt32(burst.Text));
             input_priority.Add(Convert.ToInt32(priority.Text));
-            id.Add(Convert.ToInt32(proc.Text));
             arriv.Clear();
             burst.Clear();
             priority.Clear();
@@ -59,6 +96,7 @@ namespace OS_Sceduller
 
         private void FCFS_Click(object sender, EventArgs e)
         {
+            chart1.Series[0].Points.Clear();
             int begin = 0, end = 0;
             for (int i = 0; i < input_process.Count; i++)
             {
@@ -69,34 +107,13 @@ namespace OS_Sceduller
         }
 
         private void SJF_Click(object sender, EventArgs e)
-        {/*
-            int begin = 0, end = 0,cnt;
-            cnt=input_process.Count;
-            int index = 0,i=0;
-           while(input_process.Count!=0)
-           {
-
-               int j = 0;
-               index = 0;
-               if (input_process.Count != 1)
-               {
-                   while (input_process[j] <= begin && input_process[j+1] <= begin)
-                   {
-                       if (input_burst[j + 1] < input_burst[j])
-                       {
-                           index++;
-                       }
-                       j++;
-                   }
-               }
-                end += input_burst[index];
-                chart1.Series[0].Points.AddXY(i, begin, end);
-                begin = end;
-                input_process.RemoveAt(index);
-                input_burst.RemoveAt(index);
-                i++;
-            }
-           */
+        {
+            chart1.Series[0].Points.Clear();
+            
+            List<int> copy_process = new List<int>(input_process);
+            List<int> copy_burst = new List<int>(input_burst);
+            jop_first(copy_process, copy_burst);
+           
         }
 
        
