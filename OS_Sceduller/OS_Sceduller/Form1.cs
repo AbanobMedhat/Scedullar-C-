@@ -18,8 +18,12 @@ namespace OS_Sceduller
             InitializeComponent();
         }
         List<int> input_process = new List<int>();
+        //list for arrival time
         List<int> input_burst = new List<int>();
+        //list for burst time 
         List<int> input_priority = new List<int>();
+        //list of priority 
+        // each one has index of the process
         List<int> id = new List<int>();
         void jop_first(List<int> input_process, List<int> input_burst)
         {
@@ -85,9 +89,38 @@ namespace OS_Sceduller
 
         private void add_process_Click(object sender, EventArgs e)
         {
-            input_process.Add(Convert.ToInt32(arriv.Text));
-            input_burst.Add(Convert.ToInt32(burst.Text));
-            input_priority.Add(Convert.ToInt32(priority.Text));
+            
+            if (arriv.Text == "")
+            {
+                MessageBox.Show("Please enter arrival time.", "Input Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (burst.Text == "")
+            {
+                MessageBox.Show("Please enter burst time.", "Input Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (priority.Text == "")
+            {
+                MessageBox.Show("Please enter priority time.", "Input Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            else
+            {
+                int x = Convert.ToInt32(arriv.Text);
+                if (input_process.Count == 0 || x >= input_process[input_process.Count - 1])
+                {
+                    input_process.Add(Convert.ToInt32(arriv.Text));
+                    input_burst.Add(Convert.ToInt32(burst.Text));
+                    input_priority.Add(Convert.ToInt32(priority.Text));
+                }
+                else
+                {
+                    MessageBox.Show("Please enter arrival time higher than the pervious one.", "User Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
             arriv.Clear();
             burst.Clear();
             priority.Clear();
@@ -97,23 +130,55 @@ namespace OS_Sceduller
         private void FCFS_Click(object sender, EventArgs e)
         {
             chart1.Series[0].Points.Clear();
-            int begin = 0, end = 0;
-            for (int i = 0; i < input_process.Count; i++)
+            if (input_process.Count != 0)
             {
-                end += input_burst[i];
-                chart1.Series[0].Points.AddXY(i, begin, end);
-                begin = end;
+                int begin = 0, end = 0;
+                for (int i = 0; i < input_process.Count; i++)
+                {
+                    end += input_burst[i];
+                    chart1.Series[0].Points.AddXY(i, begin, end);
+                    begin = end;
+                }
+            }
+            else 
+            {
+                MessageBox.Show("There are no processes to be scheduled please enter some processes.", "User Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void SJF_Click(object sender, EventArgs e)
         {
             chart1.Series[0].Points.Clear();
-            
-            List<int> copy_process = new List<int>(input_process);
-            List<int> copy_burst = new List<int>(input_burst);
-            jop_first(copy_process, copy_burst);
-           
+            if (input_process.Count != 0)
+            {
+                List<int> copy_process = new List<int>(input_process);
+                List<int> copy_burst = new List<int>(input_burst);
+                jop_first(copy_process, copy_burst);
+            }
+            else
+            {
+                MessageBox.Show("There are no processes to be scheduled please enter some processes.", "User Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+              
+            }
+        }
+
+        private void CLR_Click(object sender, EventArgs e)
+        {
+            if (input_process.Count != 0)
+            {
+                input_process.Clear();
+                input_burst.Clear();
+                input_priority.Clear();
+                id.Clear();
+                chart1.Series[0].Points.Clear();
+            }
+            else
+            {
+                MessageBox.Show("what are you doing ? there are no processes to be cleared.", "User Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
        

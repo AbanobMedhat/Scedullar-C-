@@ -96,6 +96,7 @@
             this.CLR.TabIndex = 5;
             this.CLR.Text = "Clear";
             this.CLR.UseVisualStyleBackColor = true;
+            this.CLR.Click += new System.EventHandler(this.CLR_Click);
             // 
             // Process
             // 
