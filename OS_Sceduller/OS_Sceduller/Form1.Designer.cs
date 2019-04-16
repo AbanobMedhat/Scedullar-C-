@@ -35,7 +35,6 @@
             this.SJF = new System.Windows.Forms.Button();
             this.RR = new System.Windows.Forms.Button();
             this.Prio = new System.Windows.Forms.Button();
-            this.Run = new System.Windows.Forms.Button();
             this.CLR = new System.Windows.Forms.Button();
             this.Process = new System.Windows.Forms.Label();
             this.arrv = new System.Windows.Forms.Label();
@@ -48,12 +47,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.priority = new System.Windows.Forms.TextBox();
             this.FCFS = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.wait = new System.Windows.Forms.TextBox();
+            this.turn = new System.Windows.Forms.TextBox();
+            this.quam = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // SJF
             // 
-            this.SJF.Location = new System.Drawing.Point(162, 205);
+            this.SJF.Location = new System.Drawing.Point(165, 216);
             this.SJF.Name = "SJF";
             this.SJF.Size = new System.Drawing.Size(75, 23);
             this.SJF.TabIndex = 1;
@@ -63,34 +70,27 @@
             // 
             // RR
             // 
-            this.RR.Location = new System.Drawing.Point(303, 205);
+            this.RR.Location = new System.Drawing.Point(304, 216);
             this.RR.Name = "RR";
             this.RR.Size = new System.Drawing.Size(101, 23);
             this.RR.TabIndex = 2;
             this.RR.Text = "Round Robin";
             this.RR.UseVisualStyleBackColor = true;
+            this.RR.Click += new System.EventHandler(this.RR_Click);
             // 
             // Prio
             // 
-            this.Prio.Location = new System.Drawing.Point(448, 205);
+            this.Prio.Location = new System.Drawing.Point(448, 216);
             this.Prio.Name = "Prio";
             this.Prio.Size = new System.Drawing.Size(88, 23);
             this.Prio.TabIndex = 3;
             this.Prio.Text = "Priority";
             this.Prio.UseVisualStyleBackColor = true;
-            // 
-            // Run
-            // 
-            this.Run.Location = new System.Drawing.Point(89, 260);
-            this.Run.Name = "Run";
-            this.Run.Size = new System.Drawing.Size(92, 36);
-            this.Run.TabIndex = 4;
-            this.Run.Text = "Run";
-            this.Run.UseVisualStyleBackColor = true;
+            this.Prio.Click += new System.EventHandler(this.Prio_Click);
             // 
             // CLR
             // 
-            this.CLR.Location = new System.Drawing.Point(383, 261);
+            this.CLR.Location = new System.Drawing.Point(414, 277);
             this.CLR.Name = "CLR";
             this.CLR.Size = new System.Drawing.Size(91, 35);
             this.CLR.TabIndex = 5;
@@ -103,9 +103,9 @@
             this.Process.AutoSize = true;
             this.Process.Location = new System.Drawing.Point(12, 24);
             this.Process.Name = "Process";
-            this.Process.Size = new System.Drawing.Size(76, 13);
+            this.Process.Size = new System.Drawing.Size(59, 13);
             this.Process.TabIndex = 6;
-            this.Process.Text = "Process Name";
+            this.Process.Text = "Process ID";
             this.Process.Click += new System.EventHandler(this.label1_Click);
             // 
             // arrv
@@ -128,10 +128,12 @@
             // 
             // proc
             // 
+            this.proc.Enabled = false;
             this.proc.Location = new System.Drawing.Point(12, 52);
             this.proc.Name = "proc";
             this.proc.Size = new System.Drawing.Size(100, 20);
             this.proc.TabIndex = 9;
+            this.proc.Text = "0";
             // 
             // burst
             // 
@@ -149,7 +151,7 @@
             // 
             // add_process
             // 
-            this.add_process.Location = new System.Drawing.Point(193, 96);
+            this.add_process.Location = new System.Drawing.Point(193, 148);
             this.add_process.Name = "add_process";
             this.add_process.Size = new System.Drawing.Size(153, 38);
             this.add_process.TabIndex = 12;
@@ -196,13 +198,85 @@
             // 
             // FCFS
             // 
-            this.FCFS.Location = new System.Drawing.Point(12, 205);
+            this.FCFS.Location = new System.Drawing.Point(12, 216);
             this.FCFS.Name = "FCFS";
             this.FCFS.Size = new System.Drawing.Size(75, 23);
             this.FCFS.TabIndex = 16;
             this.FCFS.Text = "FCFS";
             this.FCFS.UseVisualStyleBackColor = true;
             this.FCFS.Click += new System.EventHandler(this.FCFS_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(49, 261);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Avg Waiting Time";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(190, 261);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(110, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Avg Turnaround Time";
+            // 
+            // wait
+            // 
+            this.wait.Enabled = false;
+            this.wait.Location = new System.Drawing.Point(52, 292);
+            this.wait.Name = "wait";
+            this.wait.Size = new System.Drawing.Size(100, 20);
+            this.wait.TabIndex = 21;
+            this.wait.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // turn
+            // 
+            this.turn.Enabled = false;
+            this.turn.Location = new System.Drawing.Point(193, 292);
+            this.turn.Name = "turn";
+            this.turn.Size = new System.Drawing.Size(100, 20);
+            this.turn.TabIndex = 22;
+            // 
+            // quam
+            // 
+            this.quam.Location = new System.Drawing.Point(12, 112);
+            this.quam.Name = "quam";
+            this.quam.Size = new System.Drawing.Size(100, 20);
+            this.quam.TabIndex = 23;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 85);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Quantum";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(65, 187);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Preemptive SJF";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(369, 187);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(117, 23);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "Premptive Priority";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
@@ -211,6 +285,14 @@
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1065, 352);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.quam);
+            this.Controls.Add(this.turn);
+            this.Controls.Add(this.wait);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.FCFS);
             this.Controls.Add(this.priority);
             this.Controls.Add(this.label1);
@@ -223,7 +305,6 @@
             this.Controls.Add(this.arrv);
             this.Controls.Add(this.Process);
             this.Controls.Add(this.CLR);
-            this.Controls.Add(this.Run);
             this.Controls.Add(this.Prio);
             this.Controls.Add(this.RR);
             this.Controls.Add(this.SJF);
@@ -242,7 +323,6 @@
         private System.Windows.Forms.Button SJF;
         private System.Windows.Forms.Button RR;
         private System.Windows.Forms.Button Prio;
-        private System.Windows.Forms.Button Run;
         private System.Windows.Forms.Button CLR;
         private System.Windows.Forms.Label Process;
         private System.Windows.Forms.Label arrv;
@@ -255,6 +335,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox priority;
         private System.Windows.Forms.Button FCFS;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox wait;
+        private System.Windows.Forms.TextBox turn;
+        private System.Windows.Forms.TextBox quam;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
