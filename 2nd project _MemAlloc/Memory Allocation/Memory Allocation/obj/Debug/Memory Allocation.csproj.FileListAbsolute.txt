@@ -1,0 +1,9 @@
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\bin\Debug\Memory Allocation.exe.config
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\bin\Debug\Memory Allocation.exe
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\bin\Debug\Memory Allocation.pdb
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\obj\Debug\Memory Allocation.csprojResolveAssemblyReference.cache
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\obj\Debug\Memory_Allocation.Form1.resources
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\obj\Debug\Memory_Allocation.Properties.Resources.resources
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\obj\Debug\Memory Allocation.csproj.GenerateResource.Cache
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\obj\Debug\Memory Allocation.exe
+D:\Faculty\WorkSpace\Memory Allocation\Memory Allocation\obj\Debug\Memory Allocation.pdb
