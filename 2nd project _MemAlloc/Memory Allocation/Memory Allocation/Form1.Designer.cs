@@ -28,26 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listView1 = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.memSize = new System.Windows.Forms.TextBox();
             this.listView2 = new System.Windows.Forms.ListView();
             this.label3 = new System.Windows.Forms.Label();
-            this.holeSize = new System.Windows.Forms.TextBox();
-            this.holeAdd = new System.Windows.Forms.TextBox();
             this.addHole = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listView4 = new System.Windows.Forms.ListView();
             this.label4 = new System.Windows.Forms.Label();
-            this.nofSeg = new System.Windows.Forms.TextBox();
             this.addNofSeg = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.segName = new System.Windows.Forms.TextBox();
-            this.segSize = new System.Windows.Forms.TextBox();
             this.addSeg = new System.Windows.Forms.Button();
             this.listView5 = new System.Windows.Forms.ListView();
             this.firstFit = new System.Windows.Forms.Button();
@@ -62,6 +57,12 @@
             this.dell = new System.Windows.Forms.Button();
             this.diso = new System.Windows.Forms.Button();
             this.restart = new System.Windows.Forms.Button();
+            this.memSize = new System.Windows.Forms.MaskedTextBox();
+            this.holeAdd = new System.Windows.Forms.MaskedTextBox();
+            this.holeSize = new System.Windows.Forms.MaskedTextBox();
+            this.nofSeg = new System.Windows.Forms.MaskedTextBox();
+            this.segSize = new System.Windows.Forms.MaskedTextBox();
+            this.segName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +74,7 @@
             this.listView1.Size = new System.Drawing.Size(238, 128);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -97,13 +99,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // memSize
-            // 
-            this.memSize.Location = new System.Drawing.Point(28, 55);
-            this.memSize.Name = "memSize";
-            this.memSize.Size = new System.Drawing.Size(100, 20);
-            this.memSize.TabIndex = 4;
-            // 
             // listView2
             // 
             this.listView2.BackColor = System.Drawing.SystemColors.Highlight;
@@ -123,23 +118,9 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Holes Size";
             // 
-            // holeSize
-            // 
-            this.holeSize.Location = new System.Drawing.Point(409, 55);
-            this.holeSize.Name = "holeSize";
-            this.holeSize.Size = new System.Drawing.Size(100, 20);
-            this.holeSize.TabIndex = 8;
-            // 
-            // holeAdd
-            // 
-            this.holeAdd.Location = new System.Drawing.Point(290, 55);
-            this.holeAdd.Name = "holeAdd";
-            this.holeAdd.Size = new System.Drawing.Size(100, 20);
-            this.holeAdd.TabIndex = 9;
-            // 
             // addHole
             // 
-            this.addHole.Location = new System.Drawing.Point(301, 97);
+            this.addHole.Location = new System.Drawing.Point(290, 97);
             this.addHole.Name = "addHole";
             this.addHole.Size = new System.Drawing.Size(89, 27);
             this.addHole.TabIndex = 10;
@@ -174,18 +155,11 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "No of Segments";
             // 
-            // nofSeg
-            // 
-            this.nofSeg.Location = new System.Drawing.Point(28, 209);
-            this.nofSeg.Name = "nofSeg";
-            this.nofSeg.Size = new System.Drawing.Size(100, 20);
-            this.nofSeg.TabIndex = 15;
-            // 
             // addNofSeg
             // 
-            this.addNofSeg.Location = new System.Drawing.Point(28, 248);
+            this.addNofSeg.Location = new System.Drawing.Point(29, 248);
             this.addNofSeg.Name = "addNofSeg";
-            this.addNofSeg.Size = new System.Drawing.Size(115, 23);
+            this.addNofSeg.Size = new System.Drawing.Size(115, 32);
             this.addNofSeg.TabIndex = 16;
             this.addNofSeg.Text = "Add No of Segments";
             this.addNofSeg.UseVisualStyleBackColor = true;
@@ -209,25 +183,11 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Segment Size";
             // 
-            // segName
-            // 
-            this.segName.Location = new System.Drawing.Point(290, 209);
-            this.segName.Name = "segName";
-            this.segName.Size = new System.Drawing.Size(100, 20);
-            this.segName.TabIndex = 19;
-            // 
-            // segSize
-            // 
-            this.segSize.Location = new System.Drawing.Point(432, 209);
-            this.segSize.Name = "segSize";
-            this.segSize.Size = new System.Drawing.Size(100, 20);
-            this.segSize.TabIndex = 20;
-            // 
             // addSeg
             // 
-            this.addSeg.Location = new System.Drawing.Point(383, 248);
+            this.addSeg.Location = new System.Drawing.Point(368, 248);
             this.addSeg.Name = "addSeg";
-            this.addSeg.Size = new System.Drawing.Size(126, 23);
+            this.addSeg.Size = new System.Drawing.Size(141, 32);
             this.addSeg.TabIndex = 21;
             this.addSeg.Text = "Add segment";
             this.addSeg.UseVisualStyleBackColor = true;
@@ -244,9 +204,9 @@
             // 
             // firstFit
             // 
-            this.firstFit.Location = new System.Drawing.Point(44, 404);
+            this.firstFit.Location = new System.Drawing.Point(29, 383);
             this.firstFit.Name = "firstFit";
-            this.firstFit.Size = new System.Drawing.Size(75, 23);
+            this.firstFit.Size = new System.Drawing.Size(100, 44);
             this.firstFit.TabIndex = 23;
             this.firstFit.Text = "First Fit";
             this.firstFit.UseVisualStyleBackColor = true;
@@ -255,7 +215,7 @@
             // addProc
             // 
             this.addProc.Enabled = false;
-            this.addProc.Location = new System.Drawing.Point(186, 248);
+            this.addProc.Location = new System.Drawing.Point(183, 260);
             this.addProc.Name = "addProc";
             this.addProc.Size = new System.Drawing.Size(146, 45);
             this.addProc.TabIndex = 26;
@@ -265,10 +225,10 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(634, 12);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(371, 352);
@@ -287,9 +247,9 @@
             // 
             // btFit
             // 
-            this.btFit.Location = new System.Drawing.Point(409, 404);
+            this.btFit.Location = new System.Drawing.Point(440, 372);
             this.btFit.Name = "btFit";
-            this.btFit.Size = new System.Drawing.Size(75, 23);
+            this.btFit.Size = new System.Drawing.Size(92, 44);
             this.btFit.TabIndex = 30;
             this.btFit.Text = "BestFit";
             this.btFit.UseVisualStyleBackColor = true;
@@ -297,9 +257,9 @@
             // 
             // wstFit
             // 
-            this.wstFit.Location = new System.Drawing.Point(225, 444);
+            this.wstFit.Location = new System.Drawing.Point(225, 425);
             this.wstFit.Name = "wstFit";
-            this.wstFit.Size = new System.Drawing.Size(75, 23);
+            this.wstFit.Size = new System.Drawing.Size(88, 42);
             this.wstFit.TabIndex = 31;
             this.wstFit.Text = "WorstFit";
             this.wstFit.UseVisualStyleBackColor = true;
@@ -365,12 +325,71 @@
             this.restart.UseVisualStyleBackColor = true;
             this.restart.Click += new System.EventHandler(this.restart_Click);
             // 
+            // memSize
+            // 
+            this.memSize.Location = new System.Drawing.Point(29, 55);
+            this.memSize.Mask = "00000";
+            this.memSize.Name = "memSize";
+            this.memSize.Size = new System.Drawing.Size(100, 20);
+            this.memSize.TabIndex = 40;
+            this.memSize.ValidatingType = typeof(int);
+            this.memSize.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.memSize_MaskInputRejected);
+            // 
+            // holeAdd
+            // 
+            this.holeAdd.Location = new System.Drawing.Point(290, 55);
+            this.holeAdd.Mask = "00000";
+            this.holeAdd.Name = "holeAdd";
+            this.holeAdd.Size = new System.Drawing.Size(100, 20);
+            this.holeAdd.TabIndex = 41;
+            this.holeAdd.ValidatingType = typeof(int);
+            // 
+            // holeSize
+            // 
+            this.holeSize.Location = new System.Drawing.Point(409, 55);
+            this.holeSize.Mask = "00000";
+            this.holeSize.Name = "holeSize";
+            this.holeSize.Size = new System.Drawing.Size(100, 20);
+            this.holeSize.TabIndex = 42;
+            this.holeSize.ValidatingType = typeof(int);
+            // 
+            // nofSeg
+            // 
+            this.nofSeg.Location = new System.Drawing.Point(29, 209);
+            this.nofSeg.Mask = "00000";
+            this.nofSeg.Name = "nofSeg";
+            this.nofSeg.Size = new System.Drawing.Size(100, 20);
+            this.nofSeg.TabIndex = 43;
+            this.nofSeg.ValidatingType = typeof(int);
+            // 
+            // segSize
+            // 
+            this.segSize.Location = new System.Drawing.Point(432, 209);
+            this.segSize.Mask = "00000";
+            this.segSize.Name = "segSize";
+            this.segSize.Size = new System.Drawing.Size(100, 20);
+            this.segSize.TabIndex = 45;
+            this.segSize.ValidatingType = typeof(int);
+            // 
+            // segName
+            // 
+            this.segName.Location = new System.Drawing.Point(290, 209);
+            this.segName.Name = "segName";
+            this.segName.Size = new System.Drawing.Size(100, 20);
+            this.segName.TabIndex = 46;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(1065, 529);
+            this.Controls.Add(this.segName);
+            this.Controls.Add(this.segSize);
+            this.Controls.Add(this.nofSeg);
+            this.Controls.Add(this.holeSize);
+            this.Controls.Add(this.holeAdd);
+            this.Controls.Add(this.memSize);
             this.Controls.Add(this.restart);
             this.Controls.Add(this.diso);
             this.Controls.Add(this.dell);
@@ -385,24 +404,19 @@
             this.Controls.Add(this.firstFit);
             this.Controls.Add(this.listView5);
             this.Controls.Add(this.addSeg);
-            this.Controls.Add(this.segSize);
-            this.Controls.Add(this.segName);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.addNofSeg);
-            this.Controls.Add(this.nofSeg);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listView4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.addHole);
-            this.Controls.Add(this.holeAdd);
-            this.Controls.Add(this.holeSize);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listView2);
-            this.Controls.Add(this.memSize);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -417,21 +431,15 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox memSize;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox holeSize;
-        private System.Windows.Forms.TextBox holeAdd;
         private System.Windows.Forms.Button addHole;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView listView4;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox nofSeg;
         private System.Windows.Forms.Button addNofSeg;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox segName;
-        private System.Windows.Forms.TextBox segSize;
         private System.Windows.Forms.Button addSeg;
         private System.Windows.Forms.ListView listView5;
         private System.Windows.Forms.Button firstFit;
@@ -446,6 +454,12 @@
         private System.Windows.Forms.Button dell;
         private System.Windows.Forms.Button diso;
         private System.Windows.Forms.Button restart;
+        private System.Windows.Forms.MaskedTextBox memSize;
+        private System.Windows.Forms.MaskedTextBox holeAdd;
+        private System.Windows.Forms.MaskedTextBox holeSize;
+        private System.Windows.Forms.MaskedTextBox nofSeg;
+        private System.Windows.Forms.MaskedTextBox segSize;
+        private System.Windows.Forms.TextBox segName;
     }
 }
 

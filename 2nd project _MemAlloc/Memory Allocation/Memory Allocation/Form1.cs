@@ -213,54 +213,133 @@ namespace Memory_Allocation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            mSize = Convert.ToInt32(memSize.Text);
-            memSize.Text = "";
-            button1.Enabled = false;
-            addHole.Enabled = true;
-            fshHoles.Enabled = true;
+            if (Convert.ToString(memSize.Text) == "")
+            {
+                MessageBox.Show("please enter memory size ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (Convert.ToInt32(memSize.Text)<=0)
+            {
+                MessageBox.Show("Neg or zero values are not allowed here ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                mSize = Convert.ToInt32(memSize.Text);
+                memSize.Text = "";
+                button1.Enabled = false;
+                addHole.Enabled = true;
+                
+            }
         }
 
         private void addHole_Click(object sender, EventArgs e)
         {
-           
-            holesAddress.Add ( Convert.ToInt32(holeAdd.Text));
-            holesSize.Add( Convert.ToInt32(holeSize.Text));
-            totalHole += Convert.ToInt32(holeSize.Text);
-            countHole++;
-            holeAdd.Text = "";
-            holeSize.Text = "";
+            
+            if (Convert.ToString(holeAdd.Text) == "")
+            {
+                MessageBox.Show("please enter hole Address ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (Convert.ToString(holeSize.Text) == "")
+            {
+                MessageBox.Show("please enter hole size ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                
+                int te1 = (Convert.ToInt32(holeAdd.Text));
+                int te2 = (Convert.ToInt32(holeSize.Text));
+                if (te1 + te2 <= mSize)
+                {
+                    fshHoles.Enabled = true;
+                    holesAddress.Add(Convert.ToInt32(holeAdd.Text));
+                    holesSize.Add(Convert.ToInt32(holeSize.Text));
+                    totalHole += Convert.ToInt32(holeSize.Text);
+                    countHole++;
+                    holeAdd.Text = "";
+                    holeSize.Text = "";
+                }
+                else if(te1<=0||te2<=0)
+                {
+                    MessageBox.Show("Neg or zero values are  not allowed here ", "Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if(te1>=mSize)
+                {
+                    MessageBox.Show("your address out of range ", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else 
+                {
+                    MessageBox.Show("hole is out of range ", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+ 
+                }
+            }
         }
 
         private void addNofSeg_Click(object sender, EventArgs e)
         {
-            nSeg = Convert.ToInt32(nofSeg.Text);
-            nofSeg.Text = "";
-            nofSeg.Enabled = false;
-            addNofSeg.Enabled = false;
-            addSeg.Enabled = true;
+            if (Convert.ToString(nofSeg.Text) == "")
+            {
+                MessageBox.Show("please enter No of Segments ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if((Convert.ToInt32(nofSeg.Text))<=0)
+            {
+                MessageBox.Show("Neg or zero values are not allowed here ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+            }
+            else
+            {
+                nSeg = Convert.ToInt32(nofSeg.Text);
+                nofSeg.Text = "";
+                nofSeg.Enabled = false;
+                addNofSeg.Enabled = false;
+                addSeg.Enabled = true;
 
+            }
         }
 
         private void addSeg_Click(object sender, EventArgs e)
         {
-
-            List<int> temp_holes = new List<int>(holesSize);
-
-            if (countSeg < nSeg)
+            if (Convert.ToString(segName.Text) == "")
             {
-
-                tempProc.Add(new Tuple<string, int>("p" + Convert.ToString(countProc) + ":" + Convert.ToString(segName.Text), Convert.ToInt32(segSize.Text)));
-                countSeg++;
+                MessageBox.Show("please enter Segment Name ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            segName.Text = "";
-            segSize.Text = "";
-            if (countSeg == nSeg)
+            else if (Convert.ToString(segSize.Text) == "")
             {
-                addProc.Enabled = true;
-                addSeg.Enabled = false;
+                MessageBox.Show("please enter Segment Size ", "Error",
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if ((Convert.ToInt32(segSize.Text))<=0)
+            {
+                MessageBox.Show("Neg or zero values are not allowed here ", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                List<int> temp_holes = new List<int>(holesSize);
+
+                if (countSeg < nSeg)
+                {
+
+                    tempProc.Add(new Tuple<string, int>("p" + Convert.ToString(countProc) + ":" + Convert.ToString(segName.Text), Convert.ToInt32(segSize.Text)));
+                    countSeg++;
+                }
+                segName.Text = "";
+                segSize.Text = "";
+                if (countSeg == nSeg)
+                {
+                    addProc.Enabled = true;
+                    addSeg.Enabled = false;
+                }
             }
         }
-
         private void addProc_Click(object sender, EventArgs e)
         {
             firstFit.Enabled = true;
@@ -447,91 +526,100 @@ namespace Memory_Allocation
 
         private void dell_Click(object sender, EventArgs e)
         {
-            int index = comb.SelectedIndex; int exactind; int exactmem;
-            string sosos =comb.Text;
-            int addo=0;
-            if (sosos.Substring(0, 1) == "p")
-            {
-                int pos = Convert.ToInt32(sosos.Substring(1, 1));
-                for (int j = 0; j < delloc[pos].Count; j++)
-                {
-                    addo = 0;
-                    exactind = delloc[pos][j];
-                    for (int i = 0; i < exactind; i++)
-                    {
-                        addo += played_memory[i].Item2;
-                    }
-                    int sizo = played_memory[exactind].Item2;
-                    cntholes++;
-                    Tuple<string, int> tempo = new Tuple<string, int>("hole" + Convert.ToString(cntholes), sizo);
-                    played_memory.RemoveAt(delloc[pos][j]);
-                    played_memory.Insert(exactind, tempo);
-                    
 
-                }
-                if (chk)
-                {
-                    if (last_pos < pos)
-                        pos--;
-                }
-                t.RemoveAt(pos);
-                countProc--;
-                chk = true;
-                last_pos = pos;
-                comb.Items.Remove(comb.SelectedItem);
+            int index = comb.SelectedIndex; int exactind; int exactmem;
+            string sosos = comb.Text;
+            if (sosos == "")
+            {
+                MessageBox.Show("please enter Process Name ", "Error",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                int pos = Convert.ToInt32(sosos.Substring(8, 1));
-                
-                for (int j = 0; j < delold[pos].Count; j++)
+                int addo = 0;
+                if (sosos.Substring(0, 1) == "p")
                 {
-                    addo = 0;
-                    exactind = delold[pos][j];
-                    exactmem = delold2[pos][j];
-                    for (int i = 0; i < exactind; i++)
+                    int pos = Convert.ToInt32(sosos.Substring(1, 1));
+                    for (int j = 0; j < delloc[pos].Count; j++)
                     {
-                        addo += played_memory[i].Item2;
+                        addo = 0;
+                        exactind = delloc[pos][j];
+                        for (int i = 0; i < exactind; i++)
+                        {
+                            addo += played_memory[i].Item2;
+                        }
+                        int sizo = played_memory[exactind].Item2;
+                        cntholes++;
+                        Tuple<string, int> tempo = new Tuple<string, int>("hole" + Convert.ToString(cntholes), sizo);
+                        played_memory.RemoveAt(delloc[pos][j]);
+                        played_memory.Insert(exactind, tempo);
+
+
                     }
-                    int sizo = played_memory[exactind].Item2;
-                    cntholes++;
-                    countHole++;
-                    Tuple<string, int> tempo = new Tuple<string, int>("hole" + Convert.ToString(cntholes), sizo);
-                    holesAddress.Add(addo);
-                    holesSize.Add(sizo);
-                    holoName.Add(new Tuple<int, string>(sizo, "hole" + Convert.ToString(cntholes)));
-                  /*  if (chk2)
+                    if (chk)
                     {
-                        if (last_old < exactind)
-                            exactind--;
-                        if (last_old2 < exactmem)
-                            exactmem--;
-                    }*/
-                    memory.RemoveAt(exactmem);
-                    memory.Insert(exactmem, tempo);
-                    played_memory.RemoveAt(exactind);
-                    played_memory.Insert(exactind, tempo);
-                    
-                    cntold--;
-                    last_old = exactind;
-                    chk2 = true;
-                    last_old2 = exactmem;
-                    chk3 = true;
+                        if (last_pos < pos)
+                            pos--;
+                    }
+                    t.RemoveAt(pos);
+                    countProc--;
+                    chk = true;
+                    last_pos = pos;
                     comb.Items.Remove(comb.SelectedItem);
                 }
+                else
+                {
+                    int pos = Convert.ToInt32(sosos.Substring(8, 1));
+
+                    for (int j = 0; j < delold[pos].Count; j++)
+                    {
+                        addo = 0;
+                        exactind = delold[pos][j];
+                        exactmem = delold2[pos][j];
+                        for (int i = 0; i < exactind; i++)
+                        {
+                            addo += played_memory[i].Item2;
+                        }
+                        int sizo = played_memory[exactind].Item2;
+                        cntholes++;
+                        countHole++;
+                        Tuple<string, int> tempo = new Tuple<string, int>("hole" + Convert.ToString(cntholes), sizo);
+                        holesAddress.Add(addo);
+                        holesSize.Add(sizo);
+                        holoName.Add(new Tuple<int, string>(sizo, "hole" + Convert.ToString(cntholes)));
+                        /*  if (chk2)
+                          {
+                              if (last_old < exactind)
+                                  exactind--;
+                              if (last_old2 < exactmem)
+                                  exactmem--;
+                          }*/
+                        memory.RemoveAt(exactmem);
+                        memory.Insert(exactmem, tempo);
+                        played_memory.RemoveAt(exactind);
+                        played_memory.Insert(exactind, tempo);
+
+                        cntold--;
+                        last_old = exactind;
+                        chk2 = true;
+                        last_old2 = exactmem;
+                        chk3 = true;
+                        comb.Items.Remove(comb.SelectedItem);
+                    }
+                }
+                /*  for(int i=0;i<index;i++)
+                  {
+                      addo+=memory[i].Item2;
+                  }
+                  int sizo= memory[index].Item2;
+                  countHole++;
+                  Tuple<string,int>tempo=new Tuple<string,int>("hole"+Convert.ToString(countHole),sizo);
+                  holesAddress.Add(addo);
+                  holesSize.Add(sizo);
+                  memory.RemoveAt(index);
+                  memory.Insert(index, tempo);   
+                 */
             }
-          /*  for(int i=0;i<index;i++)
-            {
-                addo+=memory[i].Item2;
-            }
-            int sizo= memory[index].Item2;
-            countHole++;
-            Tuple<string,int>tempo=new Tuple<string,int>("hole"+Convert.ToString(countHole),sizo);
-            holesAddress.Add(addo);
-            holesSize.Add(sizo);
-            memory.RemoveAt(index);
-            memory.Insert(index, tempo);   
-           */
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -562,6 +650,16 @@ namespace Memory_Allocation
         private void restart_Click(object sender, EventArgs e)
         {
             Application.Restart();
+        }
+
+        private void memSize_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
        
