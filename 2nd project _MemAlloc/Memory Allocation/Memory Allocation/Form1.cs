@@ -251,7 +251,12 @@ namespace Memory_Allocation
                 
                 int te1 = (Convert.ToInt32(holeAdd.Text));
                 int te2 = (Convert.ToInt32(holeSize.Text));
-                if (te1 + te2 <= mSize)
+                 if(te1<=0||te2<=0)
+                {
+                    MessageBox.Show("Neg or zero values are  not allowed here ", "Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                 else if (te1 + te2 <= mSize)
                 {
                     fshHoles.Enabled = true;
                     holesAddress.Add(Convert.ToInt32(holeAdd.Text));
@@ -261,11 +266,7 @@ namespace Memory_Allocation
                     holeAdd.Text = "";
                     holeSize.Text = "";
                 }
-                else if(te1<=0||te2<=0)
-                {
-                    MessageBox.Show("Neg or zero values are  not allowed here ", "Error",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                
                 else if(te1>=mSize)
                 {
                     MessageBox.Show("your address out of range ", "Error",
